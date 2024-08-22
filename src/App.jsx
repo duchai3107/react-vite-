@@ -1,38 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import MyComponent from './components/learn/MyComponent'
-import { SecondComponent } from './components/learn/SecondComponent'
+import './components/ToDolist/ToDo.css';
+import TodoDaTa from './components/ToDolist/TodoDaTa';
+import TodoNew from './components/ToDolist/TodoNew';
+import ReactLogo from './assets/react.svg';
 
 const App = () => {
-  const [count, setCount] = useState(0)
-
+  const name = 'Hai Livelful';
+  const age = 20;
+  const data = { address: 'HCM', GIapha: 'Nguyen' };
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="Todo-container">
+      <div className="Todo-title">ToDo-List</div>
+      <TodoNew />
+      <TodoDaTa
+        name={name}
+        age={age}
+        data={data}
+      />
+      <div className='Todo-image'>
+        <img src={ReactLogo} className='logo' />
       </div>
-      <h1>Vite + React</h1>
-      <MyComponent />
-      <SecondComponent />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
