@@ -72,3 +72,8 @@
     background-color: aquamarine;
     color: darkblue;
 }
+
+.Todo-delete {
+    display: flex;
+    justify-content: space-between;
+}
