@@ -7,10 +7,15 @@ const App = () => {
   const name = 'Hai Livelful';
   const age = 20;
   const data = { address: 'HCM', GIapha: 'Nguyen' };
+  const Mynewtodo = (name) => {
+    alert(`Goi a ${name}`)
+  }
   return (
     <div className="Todo-container">
       <div className="Todo-title">ToDo-List</div>
-      <TodoNew />
+      <TodoNew
+        Mynewtodo={Mynewtodo}
+      />
       <TodoDaTa
         name={name}
         age={age}

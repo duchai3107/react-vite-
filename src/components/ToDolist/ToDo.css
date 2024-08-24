@@ -63,3 +63,12 @@
         animation: logo-spin infinite 20s linear;
     }
 }
+
+#root .Todo-container .Todo-new button {
+    margin-left: 30px;
+    border: 2px solid cornflowerblue;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: aquamarine;
+    color: darkblue;
+}
