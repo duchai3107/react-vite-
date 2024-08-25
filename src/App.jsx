@@ -10,10 +10,17 @@ const App = () => {
   ])
   const Mynewtodo = (name) => {
     const newtodo = {
-      id: 3,
+      id: randomIntFromInterval(1, 1000),
       name: name
     }
     Settodolist([...Todolist, newtodo])
+  }
+  const Deletetodo = (idd) => {
+    const Deletelist = Todolist.filter((item) => idd !== item.id)
+    Settodolist(Deletelist)
+  }
+  function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
   return (
     <div className="Todo-container">
@@ -24,6 +31,7 @@ const App = () => {
       {Todolist.length > 0 &&
         <TodoDaTa
           Todolist={Todolist}
+          Deletetodo={Deletetodo}
         />
       }
       {Todolist.length === 0 &&
