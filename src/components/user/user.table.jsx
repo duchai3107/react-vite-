@@ -1,78 +1,77 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Space, Table, Tag } from 'antd';
-const UserTable = () => {
+import UpdateUserModel from './uppdate.user';
+import { useState } from "react";
+import Viewuser from './view.user';
+
+const UserTable = (props) => {
+    const { datauser, loaduser } = props
+    const [Isdataupdateopen, setIsdataupdateopen] = useState(false)
+    const [dataupdate, setdataupdate] = useState(null)
+
+    const [dataview, setdataview] = useState(null)
+    const [viewopen, setviewopen] = useState(false)
+
     const columns = [
         {
             title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text) => <a>{text}</a>,
+            dataIndex: 'fullName',
+            render: (_, record) => <a
+                href="#"
+                onClick={() => {
+                    setdataview(record)
+                    setviewopen(true)
+                }}
+            >{record.fullName}
+            </a>,
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Email',
+            dataIndex: 'email',
         },
         {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'ID',
+            dataIndex: '_id',
         },
         {
-            title: 'Tags',
-            key: 'tags',
-            dataIndex: 'tags',
-            render: (_, { tags }) => (
-                <>
-                    {tags.map((tag) => {
-                        let color = tag.length > 5 ? 'geekblue' : 'green';
-                        if (tag === 'loser') {
-                            color = 'volcano';
-                        }
-                        return (
-                            <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                </>
-            ),
+            title: 'Phone',
+            dataIndex: 'phone',
         },
         {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
-                <Space size="middle">
-                    <a>Invite {record.name}</a>
-                    <a>Delete</a>
-                </Space>
+                <div style={{ display: "flex", gap: "20px" }}>
+                    <EditOutlined style={{ cursor: "pointer", color: "orange" }}
+                        onClick={() => {
+                            setdataupdate(record)
+                            setIsdataupdateopen(true)
+                        }}
+                    />
+                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                </div>
             ),
         },
+
     ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer'],
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            tags: ['loser'],
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sydney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        },
-    ];
+
     return (
-        <Table columns={columns} dataSource={data} />
+        <>
+            <Table columns={columns} dataSource={datauser} rowKey={"_id"} />
+            <UpdateUserModel
+                Isdataupdateopen={Isdataupdateopen}
+                setIsdataupdateopen={setIsdataupdateopen}
+                setdataupdate={setdataupdate}
+                dataupdate={dataupdate}
+                loaduser={loaduser}
+            />
+            <Viewuser
+                dataview={dataview}
+                setdataview={setdataview}
+                viewopen={viewopen}
+                setviewopen={setviewopen}
+            />
+        </>
     )
 }
 export default UserTable;
