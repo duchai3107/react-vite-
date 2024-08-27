@@ -22,7 +22,10 @@ const fecthAlluserapi = () => {
     const URL_BACKEND = "/api/v1/user";
     return axios.get(URL_BACKEND);
 }
-
+const Deleteapi = (id) => {
+    const URL_BACKEND = `/api/v1/user/${id}`;
+    return axios.delete(URL_BACKEND)
+}
 export {
-    creatApi, uppDateapi, fecthAlluserapi
+    creatApi, uppDateapi, fecthAlluserapi, Deleteapi
 }

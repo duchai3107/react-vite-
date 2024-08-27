@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Tag, Popconfirm, notification } from 'antd';
 import UpdateUserModel from './uppdate.user';
 import { useState } from "react";
 import Viewuser from './view.user';
+import { Deleteapi } from '../../services/api.service';
 
 const UserTable = (props) => {
     const { datauser, loaduser } = props
@@ -48,13 +49,38 @@ const UserTable = (props) => {
                             setIsdataupdateopen(true)
                         }}
                     />
-                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                    <Popconfirm
+                        title="Delete the task"
+                        description="Ban muon xoa nguoi dung nay"
+                        onConfirm={() => handledelete(record._id)}
+                        okText="Yes"
+                        cancelText="No"
+                        placement='left'
+                    >
+                        <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                    </Popconfirm>
                 </div>
             ),
         },
 
     ];
+    const handledelete = async (id) => {
+        const res = await Deleteapi(id);
+        if (res.data) {
+            notification.success({
+                message: "Delete User",
+                description: "Xoa nguoi dung thanh cong thanh cong"
 
+            })
+            await loaduser();
+        } else {
+            notification.error({
+                message: "Not Delete user",
+                description: JSON.stringify(res.message)
+            })
+        }
+
+    }
     return (
         <>
             <Table columns={columns} dataSource={datauser} rowKey={"_id"} />
@@ -73,5 +99,6 @@ const UserTable = (props) => {
             />
         </>
     )
+
 }
 export default UserTable;
