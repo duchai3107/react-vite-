@@ -96,6 +96,7 @@ const UserTable = (props) => {
                 setdataview={setdataview}
                 viewopen={viewopen}
                 setviewopen={setviewopen}
+                loaduser={loaduser}
             />
         </>
     )
